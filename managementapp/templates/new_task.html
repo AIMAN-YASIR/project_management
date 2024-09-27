@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/todo_css.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Client entry form</h2>
+    <form method="POST" action="{% url 'managementapp:enter_new_task' %}">
+        {% csrf_token %}
+        <label for="task">task: </label>
+        <input type="text" name="task" required>
+        <br>
+        <label for="due_date">due_date: </label>
+        <input type="date" name="due_date" required>
+        <h3>submit your new task:  <button type="submit">submit</button></h3>
+    </form>
+    
+
+</body>
+</html>

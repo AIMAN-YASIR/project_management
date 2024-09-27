@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'managementapp:project/'%}">
+     <input type="checkbox",id="task1",name="task1",value="task1">
+     <label for="task1">{{task_instance.task}}          {{task_instance.due_date}}</label>
+    </form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/todo_css.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="{% url 'managementapp:project_list' %}">
+        {% csrf_token %}
+        
+        <h2>Task List</h2>
+        
+        {% for task in record %}
+            <input type="checkbox" name="tasks_to_delete" value="{{ task.id }}">
+            {{ task.task }} {{ task.due_date }}<br>
+        {% endfor %}
+        
+        <!-- Add button -->
+        <button type="submit" name="action" value="add">Add New Task</button>
+    
+        <!-- Delete button -->
+        <button type="submit" name="action" value="delete">Delete Selected Tasks</button>
+    </form>
+
+    <h1>Task List</h1>
+
+<form method="GET">
+    <label for="category">Filter by category:</label>
+    <select name="category" id="category" onchange="this.form.submit()">
+        <option value="">All Categories</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>{{ category.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<ul>
+    {% for task in tasks %}
+        <li>{{ task.title }} - {{ task.due_date }} - Completed: {{ task.completed }} - Category: {{ task.category }}</li>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
